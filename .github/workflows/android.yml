@@ -3,3 +3,5 @@
   with:
     channel: 'stable'
     cache: true
+on:
+  workflow_dispatch:
