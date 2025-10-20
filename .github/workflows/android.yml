@@ -1,7 +1,8 @@
-- name: Set up Flutter
+
+on:
+  workflow_dispatch:
+- name: Setup Flutter
   uses: subosito/flutter-action@v2
   with:
     channel: 'stable'
     cache: true
-on:
-  workflow_dispatch:
