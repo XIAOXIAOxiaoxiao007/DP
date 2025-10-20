@@ -1,6 +1,4 @@
       - name: Build web
-        on:
-           workflow_dispatch:
         run: flutter build web --release --dart-define=CI=true
 
       - name: Prepare Vercel prebuilt output
