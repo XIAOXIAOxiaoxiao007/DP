@@ -1,27 +1,21 @@
-name: deploy-web-to-vercel
-on:
-  workflow_dispatch:
-  push:
-    branches: [ master, main ]
+      - name: Build web
+        on:
+           workflow_dispatch:
+        run: flutter build web --release --dart-define=CI=true
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with: { distribution: temurin, java-version: '17' }
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          cache: true
-      - run: flutter pub get
-      - run: flutter build web --release --dart-define=CI=true
-      - uses: amondnet/vercel-action@v25
+      - name: Prepare Vercel prebuilt output
+        run: |
+          rm -rf .vercel/output
+          mkdir -p .vercel/output/static
+          cp -r build/web/* .vercel/output/static
+          echo '{ "version": 3 }' > .vercel/output/config.json
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./build/web
-          vercel-args: --prod
+          working-directory: ./
+          vercel-args: --prod --prebuilt
           github-comment: false
