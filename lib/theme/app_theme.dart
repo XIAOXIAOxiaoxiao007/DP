@@ -37,7 +37,6 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
       ),
       chipTheme: base.chipTheme.copyWith(
-        color: MaterialStateProperty.all<Color>(Colors.white),
         side: const BorderSide(color: Color(0xFFE2E8F0)),
         labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -14,7 +15,7 @@ class CartScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () => context.push('/checkout'),
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 14),
               child: Text('去结算'),
